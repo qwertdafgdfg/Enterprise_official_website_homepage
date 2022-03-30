@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<!-- th:fragment 定义需要引入的代码块，该div包含的内容即为引用的公共内容 -->
+<div th:fragment="header">
+
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-8">
+                    <a href="javascript:;">
+                        <img th:src="${company.logo}" class="logo" th:alt="${company.name}"/>
+                    </a>
+                </div>
+                <div id="topsearch" class="col-xs-12 col-sm-4 col-md-4">
+                    <form id="searchform" method="get" action="javascript:;search/index/g/c.html">
+                        <div class="input-group search_group">
+                            <input type="text" name="name" class="form-control input-sm" placeholder="请输入你想要的产品···">
+                            <span class="input-group-btn">
+									<a id="submit_search" href="123" title="搜索"
+                                          class="glyphicon glyphicon-search btn-lg"
+                                          aria-hidden="true">
+									</a>
+								</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div><!-- Fixed navbar -->
+        <nav id="top_nav" class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#navbar" aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span><span
+                            class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+                    </button>
+                    <span id="small_search"
+                          class="glyphicon glyphicon-search" aria-hidden="true"></span><a class="navbar-brand"
+                                                                                          href="javascript:;">导航菜单</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a th:href="${#request.getContextPath()}+'/index/index'">首页</a></li>
+                        <li class="dropdown">
+                            <a th:href="${#request.getContextPath()}+'/index/product'">产品中心</a>
+                            <a href="javascript:;" id="app_menudown"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown" role="button"
+                               aria-expanded="false"><span
+                                    class="glyphicon glyphicon-menu-down btn-xs"></span></a>
+                            <ul class="dropdown-menu nav_small" role="menu">
+                                <li th:each="pCategorie:${pCategories}"><a th:href="${#request.getContextPath()}+'/index/product?categoryId='+${pCategorie.id}" th:text="${pCategorie.name}"></a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a th:href="${#request.getContextPath()}+'/index/example'">成功案例</a>
+                            <a href="javascript:;" id="app_menudown"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown" role="button"
+                               aria-expanded="false"><span
+                                    class="glyphicon glyphicon-menu-down btn-xs"></span></a>
+                            <ul class="dropdown-menu nav_small" role="menu">
+                                <li th:each="eCategorie:${eCategories}"><a  th:href="${#request.getContextPath()}+'/index/example?categoryId='+${eCategorie.id}" th:text="${eCategorie.name}"></a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a th:href="${#request.getContextPath()}+'/index/article'">最新资讯</a>
+                            <a href="javascript:;" id="app_menudown"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown" role="button"
+                               aria-expanded="false"><span
+                                    class="glyphicon glyphicon-menu-down btn-xs"></span></a>
+                            <ul class="dropdown-menu nav_small" role="menu">
+                                <li th:each="aCategorie:${aCategories}"><a th:href="${#request.getContextPath()}+'/index/article?categoryId='+${aCategorie.id}" th:text="${aCategorie.name}"></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="javascript:;">关于我们</a>
+                            <a href="javascript:;" id="app_menudown"
+                               class="dropdown-toggle"
+                               data-toggle="dropdown" role="button"
+                               aria-expanded="false"><span
+                                    class="glyphicon glyphicon-menu-down btn-xs"></span></a>
+                            <ul class="dropdown-menu nav_small" role="menu">
+                                <li th:each="about:${abouts}"><a th:href="${#request.getContextPath()}+'/index/about?id='+${about.id}" th:text="${about.title}"></a></li>
+                            </ul>
+                        </li>
+                        <li><a href="javascript:;">在线留言</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+    </header>
+</div>
+</html>

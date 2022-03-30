@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nwinfo.exhibition.mapper.AboutMapper">
+
+    <select id="findByAll" resultType="cn.nwinfo.exhibition.entity.About">
+      SELECT * FROM about
+    </select>
+    <select id="findBySearchStr" resultType="cn.nwinfo.exhibition.entity.About">
+      SELECT * FROM about
+      where title like "%"#{searchStr}"%"
+    </select>
+    <select id="findByHot" resultType="cn.nwinfo.exhibition.entity.About">
+      SELECT * FROM about
+      where
+      hot="1"
+    </select>
+
+    <select id="selectPage"  resultType="cn.nwinfo.exhibition.entity.About">
+        SELECT * FROM about
+    </select>
+    <select id="findById"  resultType="cn.nwinfo.exhibition.entity.About">
+        SELECT * FROM about
+      where
+      id=#{id}
+    </select>
+    <insert id="add" parameterType="cn.nwinfo.exhibition.entity.About">
+        <selectKey resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into about (title, keyword,intro,picture,markdown,html,text,time,hot,c_id)
+        values (#{title}, #{keyword}, #{intro}, #{picture}, #{markdown}, #{html}, #{text},#{time},#{hot}, #{c_id})
+    </insert>
+    <update id="updateById" parameterType="cn.nwinfo.exhibition.entity.About">
+        update about
+        <set >
+
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="keyword != null" >
+                keyword = #{keyword,jdbcType=VARCHAR},
+            </if>
+            <if test="intro != null" >
+                intro = #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null" >
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="markdown != null" >
+                markdown = #{markdown,jdbcType=VARCHAR},
+            </if>
+            <if test="html != null" >
+                html = #{html,jdbcType=VARCHAR},
+            </if>
+            <if test="text != null" >
+                text = #{text,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null" >
+                time = #{time},
+            </if>
+            <if test="hot != null" >
+                hot = #{hot},
+            </if>
+            <if test="c_id != null" >
+                c_id = #{c_id},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="cn.nwinfo.exhibition.entity.About">
+        delete FROM about
+      where
+      id=#{id}
+    </delete>
+</mapper>

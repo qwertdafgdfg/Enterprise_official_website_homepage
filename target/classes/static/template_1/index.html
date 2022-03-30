@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${seo.title}"></title>
+    <meta name="keywords" th:content="${seo.keyword}"/>
+    <meta name="description"
+          th:content="${seo.intro}"/>
+    <meta name="applicable-device" content="pc,mobile">
+    <link rel="shortcut icon" th:href="${company.favicon}">
+
+
+
+
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/bootstrap.css'" rel="stylesheet">
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/style.css'" rel="stylesheet">
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/jquery.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bxslider.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/common.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bootstrap.js'"></script>
+
+</head>
+<body>
+<div th:replace="template_1/common/header :: header"></div>
+<!-- bxslider -->
+<div class="flash">
+    <ul class="bxslider">
+        <li th:each="picture : ${pictures}"><a th:href="${picture.link}" target="_blank">
+            <img th:src="${picture.picture}"
+                 th:alt="${picture.title}"/></a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $('.bxslider').bxSlider({
+        adaptiveHeight: true,
+        infiniteLoop: true,
+        hideControlOnEnd: true,
+        auto: true
+    });
+</script>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="product_index">
+                <div class="product_head" data-move-y="-40px">
+                    <h2>产品中心</h2>
+                    <p>Smart furniture center</p>
+                </div>
+                <div class="product_list">
+
+                    <div class="col-sm-4 col-md-3 col-mm-6 product_img" data-move-y="200px"
+                         th:each="product : ${products}"><a th:href="${#request.getContextPath()}+'/index/product?id='+${product.id}"><img
+                            th:src="${product.picture}"
+                            class="img-thumbnail" th:alt="${product.title}"></a>
+                        <p class="product_title"><a th:href="${#request.getContextPath()}+'/index/product?id='+${product.id}" th:text="${product.title}"></a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="advantage" style="background-image: url(static/images/57344e66ec33d.jpg);">-->
+    <div class="advantage">
+    <div class="advantage_head" data-move-y="-50px">
+        <p>OUR ADVANTAGE</p>
+        <h2>我们的优势</h2>
+    </div>
+    <div class="container advantage_list">
+        <div class="row">
+            <div class="col-sm-6 col-md-6 advantage_col" data-move-y="200px" th:each="advantage : ${advantages}">
+                <div class="col-sm-3 col-md-3"><a href="javascript:;" target="_blank"><img
+                        th:src="${advantage.picture}"
+                        th:alt="${advantage.title}"></a></div>
+                <div class="col-sm-9 col-md-9">
+                    <h4><a href="javascript:;" target="_blank" th:text="${advantage.title}"></a></h4><span
+                        th:text="${advantage.content}">
+
+							</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="about_us" class="container about_index">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12" th:each="about,index : ${aboutsHot}">
+            <div class="about_head" data-move-y="50px">
+                <h2>ABOUT US</h2><span th:text="${about.title}"></span>
+            </div>
+            <div class="about_content" data-move-y="-80px">
+                <p><img th:align="${index.index}%2==0?'left':'right'" th:src="${about.picture}" th:alt="${about.title}">
+                <p class="about_contents" th:text="${about.intro}">
+                </p>
+                <p th:text="${index.index}"></p>
+                <a th:href="${#request.getContextPath()}+'/index/about?id='+${about.id}" class="btn btn-info" role="button">查看详细</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="case_box">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="case_head" data-move-y="-50px">
+                    <h2>成功案例</h2>
+                    <p>SUCCESSFUL CASE</p>
+                </div>
+                <div class="case_list">
+                    <div class="col-sm-4 col-md-3 col-mm-6 product_img" data-move-y="200px"
+                         th:each="example:${examples}">
+                        <a th:href="${#request.getContextPath()}+'/index/example?id='+${example.id}"><img
+                                th:src="${example.picture}"
+                                class="img-thumbnail" th:alt="${example.title}"></a>
+                        <p class="product_title"><a th:href="${#request.getContextPath()}+'/index/example?id='+${example.id}" th:text="${example.title}"></a></p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="news_head" data-move-y="-50px">
+                <h2>最新资讯</h2>
+                <p>NEWS CENTER</p>
+            </div>
+            <ul class="news_index" data-move-y="200px">
+                <li th:each="article:${articles}">
+                    <span><strong th:text="${article.time.substring(8,10)}"></strong><i
+                            th:text="${article.time.substring(0,7)}"></i></span>
+                    <a th:href="${#request.getContextPath()}+'/index/article?id='+${article.id}" th:text="${article.title}"></a>
+                    <br><em th:text="${article.intro}"></em>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="link_box">
+    <div class="container"><span class="link_title">友情链接</span>
+        <button id="link_btn" class="glyphicon glyphicon-plus"
+                aria-hidden="true"></button>
+        <span class="link_list">
+					 <a th:each="link:${links}" target="_blank" th:href="${link.link}" th:text="${link.title}"></a>
+				</span>
+    </div>
+</div>
+<div th:replace="template_1/common/footer :: footer"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+    var winHeight = 200;
+    var timer = null;
+
+    function show() {
+        document.getElementById("popWin").style.display = "block";
+        timer = setInterval("lift(5)", 2);
+    }
+
+    function hid() {
+        timer = setInterval("lift(-5)", 2);
+    }
+
+    function lift(n) {
+        var w = document.getElementById("popWin");
+        var h = parseInt(w.style.height || w.currentStyle.height);
+        if (h < winHeight && n > 0 || h > 1 && n < 0) {
+            w.style.height = (h + n).toString() + "px";
+        } else {
+            w.style.display = (n > 0 ? "block" : "none");
+            clearInterval(timer);
+        }
+    }
+
+    window.onload = function () {
+        setTimeout("show()", 1000);
+    }
+</script>

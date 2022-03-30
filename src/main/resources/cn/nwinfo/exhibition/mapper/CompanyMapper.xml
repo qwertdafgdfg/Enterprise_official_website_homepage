@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nwinfo.exhibition.mapper.CompanyMapper">
+    <select id="findBySearchStr" resultType="cn.nwinfo.exhibition.entity.Company" parameterType="String">
+      SELECT * FROM company
+      where title like "%"#{searchStr}"%"
+    </select>
+    <select id="findById" resultType="cn.nwinfo.exhibition.entity.Company">
+        SELECT * FROM company
+      where
+      id=#{id}
+    </select>
+    <select id="findByIp" resultType="cn.nwinfo.exhibition.entity.Company">
+        SELECT * FROM company
+      where
+      ip=#{ip}
+    </select>
+    <select id="findByAll" resultType="cn.nwinfo.exhibition.entity.Company">
+        SELECT * FROM company
+    </select>
+    <select id="selectPage" resultType="cn.nwinfo.exhibition.entity.Company">
+        SELECT * FROM company
+    </select>
+
+    <insert id="add" parameterType="cn.nwinfo.exhibition.entity.Company">
+        <selectKey resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into company (name,logo,address,email,phone,templates,copyright,url,favicon,qrcode)
+        values (#{name},#{logo},#{address},#{email},#{phone},#{templates},#{copyright},#{url},#{favicon},#{qrcode})
+    </insert>
+    <update id="updateById" parameterType="cn.nwinfo.exhibition.entity.Company">
+        update company
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="logo != null">
+                logo = #{logo,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="templates != null">
+                templates = #{templates,jdbcType=VARCHAR},
+            </if>
+            <if test="copyright != null">
+                copyright = #{copyright,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="favicon != null">
+                favicon = #{favicon,jdbcType=VARCHAR},
+            </if>
+
+            <if test="qrcode != null">
+                qrcode = #{qrcode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="cn.nwinfo.exhibition.entity.Company">
+        delete FROM company
+      where
+      id=#{id}
+    </delete>
+</mapper>

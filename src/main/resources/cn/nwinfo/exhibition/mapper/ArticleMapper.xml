@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nwinfo.exhibition.mapper.ArticleMapper">
+    <resultMap id="BaseResultMap" type="cn.nwinfo.exhibition.entity.Article" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="keyword" property="keyword" jdbcType="VARCHAR" />
+        <result column="intro" property="intro" jdbcType="VARCHAR" />
+        <result column="picture" property="picture" jdbcType="VARCHAR" />
+        <result column="markdown" property="markdown" jdbcType="VARCHAR" />
+        <result column="html" property="html" jdbcType="VARCHAR" />
+        <result column="text" property="text" jdbcType="VARCHAR" />
+        <result column="time" property="time" jdbcType="TIMESTAMP" />
+        <result column="hot" property="hot" jdbcType="TIMESTAMP" />
+        <result column="clicks" property="clicks" jdbcType="TIMESTAMP" />
+        <result column="c_id" property="c_id" jdbcType="VARCHAR" />
+    </resultMap>
+    <select id="findByAll" resultMap="BaseResultMap">
+      SELECT * FROM article
+    </select>
+    <select id="findBySearchStr" resultMap="BaseResultMap"  parameterType="String">
+      SELECT * FROM article
+      where title like "%"#{searchStr}"%"
+    </select>
+    <select id="findByHot" resultMap="BaseResultMap">
+      SELECT * FROM article
+      where
+      hot="1"
+    </select>
+
+    <select id="selectPage"  resultMap="BaseResultMap">
+        SELECT * FROM article
+
+        WHERE 1=1
+
+        <if test="id != null">
+            and id=#{id}
+        </if>
+        <if test="title != null">
+            and title like CONCAT('%','${title}','%' )
+        </if>
+        <if test="keyword != null">
+            and keyword like CONCAT('%','${keyword}','%' )
+        </if>
+        <if test="intro != null">
+            and intro like CONCAT('%','${intro}','%' )
+        </if>
+        <if test="text != null">
+            and text like CONCAT('%','${text}','%' )
+        </if>
+        <if test="hot != null">
+            and hot =#{hot}
+        </if>
+        <if test="c_id != null">
+            and c_id=#{c_id}
+        </if>
+
+    </select>
+    <select id="findById"  resultMap="BaseResultMap">
+        SELECT * FROM article
+      where
+      id=#{id}
+    </select>
+    <insert id="add" parameterType="cn.nwinfo.exhibition.entity.Article">
+        <selectKey resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into article (title, keyword,intro,picture,markdown,html,text,time,hot,c_id)
+        values (#{title}, #{keyword}, #{intro}, #{picture}, #{markdown}, #{html}, #{text},#{time},#{hot}, #{c_id})
+    </insert>
+    <update id="updateById" parameterType="cn.nwinfo.exhibition.entity.Article">
+        update article
+        <set >
+
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="keyword != null" >
+                keyword = #{keyword,jdbcType=VARCHAR},
+            </if>
+            <if test="intro != null" >
+                intro = #{intro,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null" >
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="markdown != null" >
+                markdown = #{markdown,jdbcType=VARCHAR},
+            </if>
+            <if test="html != null" >
+                html = #{html,jdbcType=VARCHAR},
+            </if>
+            <if test="text != null" >
+                text = #{text,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null" >
+                time = #{time},
+            </if>
+            <if test="hot != null" >
+                hot = #{hot},
+            </if>
+            <if test="c_id != null" >
+                c_id = #{c_id},
+            </if>
+            <if test="clicks != null">
+                clicks = #{clicks},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="cn.nwinfo.exhibition.entity.Article">
+        delete FROM article
+      where
+      id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nwinfo.exhibition.mapper.AdvantageMapper">
+    <select id="findBySearchStr" resultType="cn.nwinfo.exhibition.entity.Advantage" parameterType="String">
+      SELECT * FROM advantage
+      where title like "%"#{searchStr}"%"
+    </select>
+    <select id="findById" resultType="cn.nwinfo.exhibition.entity.Advantage">
+        SELECT * FROM advantage
+      where
+      id=#{id}
+    </select>
+    <select id="findByIp" resultType="cn.nwinfo.exhibition.entity.Advantage">
+        SELECT * FROM advantage
+      where
+      ip=#{ip}
+    </select>
+    <select id="findByAll" resultType="cn.nwinfo.exhibition.entity.Advantage">
+        SELECT * FROM advantage
+    </select>
+    <select id="selectPage" resultType="cn.nwinfo.exhibition.entity.Advantage">
+        SELECT * FROM advantage
+    </select>
+
+    <insert id="add" parameterType="cn.nwinfo.exhibition.entity.Advantage">
+        <selectKey resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into advantage (title,content,picture,time)
+        values (#{title},#{content},#{picture},#{time})
+    </insert>
+    <update id="updateById" parameterType="cn.nwinfo.exhibition.entity.Advantage">
+        update advantage
+        <set >
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null" >
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null" >
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="cn.nwinfo.exhibition.entity.Advantage">
+        delete FROM advantage
+      where
+      id=#{id}
+    </delete>
+</mapper>

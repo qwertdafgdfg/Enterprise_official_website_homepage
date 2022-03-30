@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${seo.title}"></title>
+    <meta name="keywords" th:content="${seo.keyword}"/>
+    <meta name="description"
+          th:content="${seo.intro}"/>
+    <meta name="applicable-device" content="pc,mobile">
+    <link rel="shortcut icon" th:href="${company.favicon}">
+
+
+
+
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/bootstrap.css'" rel="stylesheet">
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/style.css'" rel="stylesheet">
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/jquery.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bxslider.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/common.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bootstrap.js'"></script>
+
+</head>
+<body>
+<h3 style="text-align: center;margin-top: 200px">主题4，页面设计师正在努力设计中···</h3>
+<!--<div th:replace="template_1/common/header :: header"></div>-->
+<!--<div th:replace="template_1/common/footer :: footer"></div>-->
+
+</body>
+</html>

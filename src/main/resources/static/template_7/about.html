@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${about.title}"></title>
+    <meta name="keywords" th:content="${about.keyword}"/>
+    <meta name="description"
+          th:content="${about.intro}"/>
+    <meta name="applicable-device" content="pc,mobile">
+    <link rel="shortcut icon" th:href="${company.favicon}">
+
+
+
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/bootstrap.css'" rel="stylesheet">
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/style.css'" rel="stylesheet">
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/jquery.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bxslider.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/common.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bootstrap.js'"></script>
+    <link rel="stylesheet" href="https://www.mdeditor.com/css/editormd.min.css">
+    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+</head>
+<body>
+<div th:replace="template_1/common/header :: header"></div>
+
+<div th:utext="${about.html}" class="markdown-body editormd-preview-container" previewcontainer="true" style="padding: 20px;max-width: 980px;margin: 0 auto;background: #eee;">
+
+</div>
+
+
+<div th:replace="template_1/common/footer :: footer"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+    var winHeight = 200;
+    var timer = null;
+
+    function show() {
+        document.getElementById("popWin").style.display = "block";
+        timer = setInterval("lift(5)", 2);
+    }
+
+    function hid() {
+        timer = setInterval("lift(-5)", 2);
+    }
+
+    function lift(n) {
+        var w = document.getElementById("popWin");
+        var h = parseInt(w.style.height || w.currentStyle.height);
+        if (h < winHeight && n > 0 || h > 1 && n < 0) {
+            w.style.height = (h + n).toString() + "px";
+        } else {
+            w.style.display = (n > 0 ? "block" : "none");
+            clearInterval(timer);
+        }
+    }
+
+    window.onload = function () {
+        setTimeout("show()", 1000);
+    }
+</script>

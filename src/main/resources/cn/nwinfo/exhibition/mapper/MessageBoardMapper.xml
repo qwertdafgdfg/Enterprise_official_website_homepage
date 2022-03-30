@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nwinfo.exhibition.mapper.MessageBoardMapper">
+    <select id="findBySearchStr" resultType="cn.nwinfo.exhibition.entity.MessageBoard" parameterType="String">
+      SELECT * FROM messageBoard
+      where title like "%"#{searchStr}"%"
+    </select>
+    <select id="findById" resultType="cn.nwinfo.exhibition.entity.MessageBoard">
+        SELECT * FROM messageBoard
+      where
+      id=#{id}
+    </select>
+    <select id="findByIp" resultType="cn.nwinfo.exhibition.entity.MessageBoard">
+        SELECT * FROM messageBoard
+      where
+      ip=#{ip}
+    </select>
+    <select id="findByAll" resultType="cn.nwinfo.exhibition.entity.MessageBoard">
+        SELECT * FROM messageBoard
+    </select>
+    <select id="selectPage" resultType="cn.nwinfo.exhibition.entity.MessageBoard">
+        SELECT * FROM messageBoard
+    </select>
+
+    <insert id="add" parameterType="cn.nwinfo.exhibition.entity.MessageBoard">
+        <selectKey resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into messageBoard (name,phone,title,demand,isElectrify,time)
+        values (#{name},#{phone},#{title},#{demand},#{isElectrify},#{time})
+    </insert>
+    <update id="updateById" parameterType="cn.nwinfo.exhibition.entity.MessageBoard">
+        update messageBoard
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="demand != null" >
+                demand = #{demand,jdbcType=VARCHAR},
+            </if>
+            <if test="isElectrify != null" >
+                isElectrify = #{isElectrify,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null" >
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="cn.nwinfo.exhibition.entity.MessageBoard">
+        delete FROM messageBoard
+      where
+      id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<!-- th:fragment 定义需要引入的代码块，该div包含的内容即为引用的公共内容 -->
+<div th:fragment="footer">
+    <!-- ==================== S footer ==================== -->
+    <footer class="footer">
+        <div class="footer-main">
+            <div id="a1portalSkin_footerAreaA" class="page-width clearfix">
+                <!-- Start_Module_228961 --><a name="26514" id="26514"></a>
+                <div class="module-default module-no-margin">
+                    <div class="module-inner">
+                        <div id="a1portalSkin_ctr228961228961_mainArea" class="module-content">
+                            <!-- Start_Module_228961 -->
+                            <div class="qhd-module">
+                                <div class="column">
+                                    <div class="col-5-1">
+                                        <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_QHDCPM228961M1"
+                                             class="qhd_column_contain">
+                                            <!-- Start_Module_228962 --><a name="26515" id="26515"></a>
+                                            <div class="module-default">
+                                                <div class="module-inner">
+                                                    <div class="module-title module-title-default clearfix">
+                                                        <div class="module-title-content clearfix">
+                                                            <h3 style="" class="">关于我们</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_ctr228962228962_mainArea"
+                                                         class="module-content">
+                                                        <!-- Start_Module_228962 -->
+                                                        <!-- S link-line -->
+                                                        <div class="link link-block">
+                                                            <ul>
+
+                                                                <li  th:each="about:${abouts}">
+                                                                    <a th:href="@{/index/about?id=}+${about.id}">
+                                                                        <span th:text="${about.title}"></span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- E link-line -->
+                                                        <!-- End_Module_228962 -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5-1">
+                                        <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_QHDCPM228961M1"
+                                             class="qhd_column_contain">
+                                            <!-- Start_Module_228962 --><a name="26515" id="26515"></a>
+                                            <div class="module-default">
+                                                <div class="module-inner">
+                                                    <div class="module-title module-title-default clearfix">
+                                                        <div class="module-title-content clearfix">
+                                                            <h3 style="" class="">产品中心</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_ctr228962228962_mainArea"
+                                                         class="module-content">
+                                                        <!-- Start_Module_228962 -->
+                                                        <!-- S link-line -->
+                                                        <div class="link link-block">
+                                                            <ul>
+
+                                                                <li th:each="pCategorie:${pCategories}">
+                                                                    <a th:href="@{/index/product?categoryId=}+${pCategorie.id}">
+                                                                        <span th:text="${pCategorie.name}"></span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- E link-line -->
+                                                        <!-- End_Module_228962 -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5-1">
+                                        <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_QHDCPM228961M1"
+                                             class="qhd_column_contain">
+                                            <!-- Start_Module_228962 --><a name="26515" id="26515"></a>
+                                            <div class="module-default">
+                                                <div class="module-inner">
+                                                    <div class="module-title module-title-default clearfix">
+                                                        <div class="module-title-content clearfix">
+                                                            <h3 style="" class="">新闻资讯</h3>
+                                                        </div>
+                                                    </div>
+                                                    <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_ctr228962228962_mainArea"
+                                                         class="module-content">
+                                                        <!-- Start_Module_228962 -->
+                                                        <!-- S link-line -->
+                                                        <div class="link link-block">
+                                                            <ul>
+
+                                                                <li th:each="aCategorie:${aCategories}">
+                                                                    <a th:href="@{/index/product?categoryId=}+${aCategorie.id}">
+                                                                        <span th:text="${aCategorie.name}"></span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <!-- E link-line -->
+                                                        <!-- End_Module_228962 -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-5-2 last">
+                                        <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_QHDCPM228961M4"
+                                             class="qhd_column_contain">
+                                            <!-- Start_Module_228964 --><a name="26517" id="26517"></a>
+                                            <div class="module-default">
+                                                <div class="module-inner">
+                                                    <div id="a1portalSkin_ctr228961228961_Column5C20A20A20A20A20_ctr228964228964_mainArea"
+                                                         class="module-content">
+                                                        <!-- Start_Module_228964 -->
+                                                        <div class="qhd-content">
+                                                            <p style="text-align: center;">
+                                                                <img th:alt="${company.name}"
+                                                                     th:src="${company.qrcode}"
+                                                                                                style="width: 120px; height: 120px;"/><br/>
+                                                                <span style="line-height: 1.8;">扫描二维码</span></p>
+                                                        </div>
+                                                        <!-- End_Module_228964 -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End_Module_228961 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ==================== E footer ==================== -->
+    <!-- ==================== S bottom ==================== -->
+    <section class="bottom">
+        <div id="a1portalSkin_bottomAreaA" class="page-width clearfix">
+            <!-- Start_Module_228966 --><a name="26519" id="26519"></a>
+            <div class="module-default module-no-margin">
+                <div class="module-inner">
+                    <div id="a1portalSkin_ctr228966228966_mainArea" class="module-content">
+                        <!-- Start_Module_228966 -->
+                        <div class="qhd-content">
+                            <p style="text-align: center;" th:utext="${company.copyright}"></p>
+                        </div>
+                        <!-- End_Module_228966 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ==================== E bottom ==================== -->
+
+    <!-- E go top -->
+    <div class="gotop-wrapper"><a href="javascript:;" class="fixed-gotop gotop"></a></div>
+    <!-- E go top -->
+
+    <!-- 外部脚本 -->
+    <script>
+        (function () {
+            var bp = document.createElement('script');
+            var curProtocol = window.location.protocol.split(':')[0];
+            if (curProtocol === 'https') {
+                bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+            } else {
+                bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+            }
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(bp, s);
+        })();
+    </script>
+
+</div>
+</html>

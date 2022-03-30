@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nwinfo.exhibition.mapper.ExampleCategoryMapper">
+    <select id="findBySearchStr" resultType="cn.nwinfo.exhibition.entity.ProductCategory" parameterType="String">
+      SELECT * FROM exampleCategory
+      where name like "%"#{searchStr}"%"
+    </select>
+    <select id="findById" resultType="cn.nwinfo.exhibition.entity.ExampleCategory">
+        SELECT * FROM exampleCategory
+      where
+      id=#{id}
+    </select>
+    <select id="findByAll" resultType="cn.nwinfo.exhibition.entity.ExampleCategory">
+        SELECT * FROM exampleCategory
+    </select>
+    <select id="selectPage" resultType="cn.nwinfo.exhibition.entity.ExampleCategory">
+        SELECT * FROM exampleCategory
+    </select>
+    <insert id="add" parameterType="cn.nwinfo.exhibition.entity.ExampleCategory">
+        <selectKey resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into exampleCategory (name)
+        values (#{name})
+    </insert>
+    <update id="updateById" parameterType="cn.nwinfo.exhibition.entity.ExampleCategory">
+        update exampleCategory
+        <set >
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="cn.nwinfo.exhibition.entity.ExampleCategory">
+        delete FROM exampleCategory
+      where
+      id=#{id}
+    </delete>
+</mapper>

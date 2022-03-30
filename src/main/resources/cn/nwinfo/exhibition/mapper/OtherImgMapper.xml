@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.nwinfo.exhibition.mapper.OtherImgMapper">
+    <select id="findBySearchStr" resultType="cn.nwinfo.exhibition.entity.OtherImg" parameterType="String">
+      SELECT * FROM otherImg
+      where title like "%"#{searchStr}"%"
+    </select>
+    <select id="findById" resultType="cn.nwinfo.exhibition.entity.OtherImg">
+        SELECT * FROM otherImg
+      where
+      id=#{id}
+    </select>
+    <select id="findByIp" resultType="cn.nwinfo.exhibition.entity.OtherImg">
+        SELECT * FROM otherImg
+      where
+      ip=#{ip}
+    </select>
+    <select id="findByAll" resultType="cn.nwinfo.exhibition.entity.OtherImg">
+        SELECT * FROM otherImg
+    </select>
+    <select id="selectPage" resultType="cn.nwinfo.exhibition.entity.OtherImg">
+        SELECT * FROM otherImg
+    </select>
+
+    <insert id="add" parameterType="cn.nwinfo.exhibition.entity.OtherImg">
+        <selectKey resultType="java.lang.Integer" order="AFTER">
+            SELECT LAST_INSERT_ID() AS ID
+        </selectKey>
+        insert into otherImg (title,content,link,picture,time)
+        values (#{title},#{content},#{link},#{picture},#{time})
+    </insert>
+    <update id="updateById" parameterType="cn.nwinfo.exhibition.entity.OtherImg">
+        update otherImg
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="link != null">
+                link = #{link,jdbcType=VARCHAR},
+            </if>
+            <if test="picture != null">
+                picture = #{picture,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id}
+
+    </update>
+    <delete id="deleteById" parameterType="cn.nwinfo.exhibition.entity.OtherImg">
+        delete FROM otherImg
+      where
+      id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${seo.title}"></title>
+    <meta name="keywords" th:content="${seo.keyword}"/>
+    <meta name="description"
+          th:content="${seo.intro}"/>
+    <meta name="applicable-device" content="pc,mobile">
+    <link rel="shortcut icon" th:href="${company.favicon}">
+
+
+
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/bootstrap.css'" rel="stylesheet">
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/style.css'" rel="stylesheet">
+    <link th:href="${#request.getContextPath()}+'/template_1/static/css/pagination.css'" rel="stylesheet">
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/jquery.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bxslider.min.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/common.js'"></script>
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/bootstrap.js'"></script>
+
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+    <link rel="stylesheet" href="https://www.mdeditor.com/css/editormd.min.css">
+    <link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/KaTeX/0.3.0/katex.min.css">
+</head>
+<body>
+<div th:replace="template_1/common/header :: header"></div>
+
+<div class="banner">
+    <a th:href="${advertisingMap.link}">
+        <img th:src="${advertisingMap.picture}" th:alt="${advertisingMap.title}" width="100%">
+    </a>
+</div>
+<div class="container"  id="app" style="min-height: 500px">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="product_index">
+                <div class="case_head" data-move-y="-50px">
+                    <h2>成功案例</h2>
+                    <p>SUCCESSFUL CASE</p>
+                </div>
+                <div class="product_list">
+
+
+                    <div class="col-sm-4 col-md-3 col-mm-6 product_img" data-move-y="200px"
+                         v-for="item in page.content"><a :href="website+'/index/example?id='+item.id"><img
+                            :src="item.picture"
+                            class="img-thumbnail" :alt="item.title"></a>
+                        <p class="product_title"><a :href="website+'/index/example?id='+item.id">{{item.title}}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 style="text-align: center">{{Loading}}{{noData}}
+    </h4>
+</div>
+
+<script th:inline="javascript">
+    var context ="http://"+window.location.host;
+
+    var categoryId = [[${categoryId}]]
+    var pageNum = 1;
+    var pageSize = 16;
+    console.log(categoryId);
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                website:context,
+                Loading:"努力加载中···",
+                noData:"",
+                page: {
+                    pageNum:1
+                }
+            }
+        },
+        created() {
+            const thi = this
+
+            //1.get通过直接发字符串拼接
+            axios.get(`/api/example/findPage?c_id=` + categoryId+"&pageNum="+pageNum+"&pageSize="+pageSize)
+
+                .then(response => {
+                    console.log(response.data.pageNum);
+
+                    if (response.data.pageNum>0){
+                        this.page = response.data;
+                        console.log(thi.page.content);
+
+                    }else {
+                        thi.Loading="";
+                        thi.noData="没有更多数据了···"
+                        console.log(thi.Loading+thi.noData);
+                    }
+
+                })
+                .
+                catch(error => {
+                    console.log(error); //请求失败返回的数据
+                })
+            ;
+
+
+            window.addEventListener("scroll", function(event) {
+                //变量scrollTop是滚动条滚动时，距离顶部的距离
+                var scrollTop = document.documentElement.scrollTop||document.body.scrollTop;
+                //变量windowHeight是可视区的高度
+                var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+                //变量scrollHeight是滚动条的总高度
+                var scrollHeight = document.documentElement.scrollHeight||document.body.scrollHeight;
+                //滚动条到底部的条件
+                if(scrollTop+windowHeight+20>scrollHeight){
+                    console.log(scrollTop+windowHeight+"==============="+scrollHeight);
+
+                    pageNum++
+                    //1.get通过直接发字符串拼接
+                    axios.get(`/api/example/findPage?c_id=` + categoryId+"&pageNum="+pageNum+"&pageSize="+pageSize)
+
+                        .then(response => {
+                        console.log(response.data.pageNum);
+                    console.log(thi.page.pageNum);
+                        if (thi.page.pageNum!=response.data.pageNum){
+                            thi.page.pageNum=response.data.pageNum
+                            thi.page.content= thi.page.content.concat(response.data.content)
+                            console.log(thi.page.content);
+
+                        }else {
+                            thi.Loading="";
+                            thi.noData="没有更多数据了···"
+                        }
+
+                    }).
+                    catch(error => {
+                        console.log(error); //请求失败返回的数据
+                    });
+                }
+
+            });
+
+        }
+    })
+</script>
+
+<div th:replace="template_1/common/footer :: footer"></div>
+
+</body>
+</html>
+<script type="text/javascript">
+    var winHeight = 200;
+    var timer = null;
+
+    function show() {
+        document.getElementById("popWin").style.display = "block";
+        timer = setInterval("lift(5)", 2);
+    }
+
+    function hid() {
+        timer = setInterval("lift(-5)", 2);
+    }
+
+    function lift(n) {
+        var w = document.getElementById("popWin");
+        var h = parseInt(w.style.height || w.currentStyle.height);
+        if (h < winHeight && n > 0 || h > 1 && n < 0) {
+            w.style.height = (h + n).toString() + "px";
+        } else {
+            w.style.display = (n > 0 ? "block" : "none");
+            clearInterval(timer);
+        }
+    }
+
+    window.onload = function () {
+        setTimeout("show()", 1000);
+    }
+</script>

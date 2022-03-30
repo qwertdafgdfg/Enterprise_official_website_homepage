@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:http="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<!-- th:fragment 定义需要引入的代码块，该div包含的内容即为引用的公共内容 -->
+<div th:fragment="footer">
+
+    <script th:src="${#request.getContextPath()}+'/template_1/static/js/jquery.smoove.min.js'"></script>
+
+    <script>
+        $(
+            '.product_head,.product_img,.advantage_head,.advantage_col,.about_head,.about_content,.case_head,.news_head,.news_index'
+        ).smoove({
+            offset: '10%'
+        });
+    </script>
+    <nav class="navbar navbar-default navbar-fixed-bottom footer_nav">
+        <div class="foot_nav btn-group dropup"><a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                                  aria-expanded="false" href="javascript:;"><span
+                class="glyphicon glyphicon-share btn-lg" aria-hidden="true"></span>
+            分享</a>
+            <div class="dropdown-menu webshare">
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style_32x32">
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_weixin"></a>
+                    <a class="jiathis_button_renren"></a>
+                    <a href="javascript:;" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                </div>
+                <script th:src="${#request.getContextPath()}+'/template_1/static/js/jia.js'"></script>
+
+                <!-- JiaThis Button END -->
+            </div>
+        </div>
+        <div class="foot_nav"><a th:href="'tel:'+${company.phone}"><span class="glyphicon glyphicon-phone btn-lg"
+                                                              aria-hidden="true"></span>手机</a></div>
+        <div class="foot_nav" aria-hidden="true" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+             aria-controls="navbar"><span class="glyphicon glyphicon-th-list btn-lg"></span>分类
+        </div>
+        <div class="foot_nav"><a id="gototop" href="javascript:;"><span class="glyphicon glyphicon-circle-arrow-up btn-lg"
+                                                                        aria-hidden="true"></span>顶部</a></div>
+    </nav>
+    <footer>
+        <div class="copyright">
+            <p th:text="${company.copyright}"></p>
+            <p class="copyright_p" th:text="'地址：'+${company.address}+'   电话：'+${company.phone}"></p>
+        </div>
+    </footer>
+</div>
+</html>
