@@ -14,5 +14,7 @@ public class Test01 {
         IloCplex.IntParam variableSelect = IloCplex.Param.MIP.Strategy.VariableSelect;
         IloCplex.DoubleParam mipGap = IloCplex.Param.MIP.Tolerances.MIPGap;
 
+        System.out.println("ssssssssssssss");
+        System.out.println("test01Branch");
     }
 }
