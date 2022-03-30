@@ -28,7 +28,7 @@ mogu:
     upload: /www/uploadFile/moli    #定义文件上传的路径,真实地址
     mapping: /usr/image
 server:
-  port: 9999
+  port: 9991
 baiduTranslate:
   appid: 20200119000376719
   securityKey: fG26yzXkv9JLfHBr0nQa
