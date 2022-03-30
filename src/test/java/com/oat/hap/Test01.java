@@ -17,6 +17,5 @@ public class Test01 {
         System.out.println("ssssssssssssss");
         System.out.println("test01Branch");
         System.out.println("aaaaaaaaaaaaaaaa");
-        System.out.println("\"test01\"test01\"test01\"test01\"test01\"test01\"test01\"test01");
     }
 }
