@@ -43,6 +43,14 @@ public class IpUtil {
         }
         return ipAddress;
     }
+
+    /**
+     *功能描述  判断登录设备类型。
+     * @author liYuan
+     * @date 2022/3/30 14:201231231313
+      * @param request
+     * @return java.lang.String
+     */
     public  static String getDeviceType(HttpServletRequest request){
         String User_Agent = request.getHeader("User-Agent");
         if (User_Agent.contains("Android")||User_Agent.contains("Linux")) {
